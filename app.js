@@ -9,6 +9,7 @@ var mongoose = require('mongoose');
 var fs = require('fs');
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var http = require('http');
 
 
 var records = [];
@@ -23,10 +24,10 @@ csv(records)
 
    //console.log(row);
 })
-   .on('end', function (count) {
-   var MongoClient = require('mongodb').MongoClient;
+  .on('end', function (count) {
+  var MongoClient = require('mongodb').MongoClient;
    // Connect to the db
-   MongoClient.connect("mongodb://localhost:27017/exampleDb", function (err, db) //New Database
+   MongoClient.connect("mongodb://localhost:27017/MeteorDB", function (err, db) //New Database
     {
       var collection = db.collection('sample.js') //New Collection:Sample
       collection.insert(records, function (err, doc) 
@@ -34,12 +35,18 @@ csv(records)
          console.log(doc);
       });
    });
-   console.log('Number of lines: ' + count);
+   console.log("Number of lines: " + count);
 });
+  
 
 
+
+//Mongoose Connnections
+//mongoose.connect("mongodb://localhost:27017/MeteorDB");
+//require('./models/sample');
 
 // view engine setup
+app.set('port', process.env.PORT || 3000)
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
@@ -85,5 +92,7 @@ app.use(function(err, req, res, next) {
     });
 });
 
-
+http.createServer(app).listen(app.get('port'), function(){
+  console.log("listening on port" + app.get('port'));
+});
 module.exports = app;

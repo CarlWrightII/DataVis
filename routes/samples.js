@@ -9,8 +9,8 @@ var mongoose = require('mongoose')
  exports.list = function(req, res){
  	Sample.find({}, function(err, samples){
  		res.render('samples', {
- 			title: 'Collection Samples',
- 			samples: samples
+ 			title: 'Meteor Samples',
+ 			//samples: samples
  		});
  	});
  }
@@ -18,6 +18,6 @@ var mongoose = require('mongoose')
  exports.jsonlist = function(req, res) {
   Sample.find({}, function(err, doc) {
     res.send(doc);
-    	title: 'Collections'  
+    	title: 'Meteors'  
   });
 }

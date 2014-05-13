@@ -5,24 +5,16 @@ var meteor = mongoose.model("Sample", new Schema({ //The model based off the dat
 		name : String,  
 		nametype : String,
 		recclass : String,
-		mass : int,
+		mass : Number,
 		fall : String,
-		year : int,
-		id : int,
-		reclat : float,
-		reclong : float
-}), 'newSample')};
+		year : Number,
+		id : Number,
+		reclat : Number,
+		reclong : Number,
+		_id:String
+}),
+'Sample');
 
-function webpage (req, res){
 
-		//finding documents
-		meteor.find({}).exec(function(err, result){
-			if (!err){
-				res.write(html1 + JSON.stringify(result, undefined, 2)  + html2 + result.length + html3);
-			}
-			else{
-				res.end("Error in retreving docs." + err)
-			}
-		});
-}
+
 
